@@ -23,7 +23,7 @@
             <input class="btn btn-primary disabled" type="button" value="Next">
         {% endif %}
     </p>
-    </div class="row"><br>
+    <div class="row"><br>
         <table class="table table-bordered">
             {% for field in ['Name', 'Diameter', 'Climate', 'Terrain', 'Surface Water Percentage', 'Population', 'Residents', 'Vote'] %}
                 <th>{{ field }}</th>
@@ -64,23 +64,30 @@
     </div>
 </div>
 
-<div class="modal fade" id="residentModal">
+<div class="modal fade" id="residentModal" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Residents</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Residents</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        {% for field in ['Name', 'Height', 'Mass', 'Skin color', 'Hair color', 'Eye color', 'Birth year', 'Gender'] %}
+                            <th>{{ field }}</th>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="voteModal">
+<div class="modal fade" id="voteModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
