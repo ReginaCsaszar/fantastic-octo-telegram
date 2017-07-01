@@ -25,9 +25,12 @@
     </p>
     <div class="row"><br>
         <table class="table table-bordered">
-            {% for field in ['Name', 'Diameter', 'Climate', 'Terrain', 'Surface Water Percentage', 'Population', 'Residents', 'Vote'] %}
+            {% for field in ['Name', 'Diameter', 'Climate', 'Terrain', 'Surface Water Percentage', 'Population', 'Residents'] %}
                 <th>{{ field }}</th>
             {% endfor %}
+            {% if user %}
+                <th>Vote</th>
+            {% endif %}
             
             {% for planet in data['results']  %}
                 <tr>
@@ -56,8 +59,10 @@
                     {% else %}                
                         <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#residentModal" data-info="{{ planet['residents'] }}" data-planet="{{ planet['name'] }}">Residents <span class="badge">{{ planet['residents']|length }}</span></button></td>
                     {% endif %}
-                    
+
+                    {% if user %}
                     <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#voteModal">Vote</button></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

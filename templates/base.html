@@ -23,8 +23,13 @@
                     <li><a href='#' data-toggle="modal" data-target="#statModal">Voting statistics</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    {% if user %}
+                    <li class="navbar-text"><span class="glyphicon glyphicon-user"></span> {{ user }}</li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    {% else %}
                     <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

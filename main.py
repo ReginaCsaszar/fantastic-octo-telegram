@@ -1,9 +1,10 @@
 """Main program functions"""
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for, escape, request
 import requests
 import content
 
 app = Flask(__name__)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 
 @app.route("/")
@@ -11,13 +12,26 @@ app = Flask(__name__)
 def index_route(page="1"):
     api = "http://swapi.co/api/planets/?page=" + page
     data = requests.get(api).json()
-    return render_template('planets.html', data=data)
+    if 'username' in session:
+        user = escape(session['username'])
+        return render_template('planets.html', data=data, user=user)
+    else:
+        return render_template('planets.html', data=data)
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login_route():
+    if request.method == 'POST':
+        session['username'] = request.form['user']
+        return redirect("/")
     mode = "Login"
     return render_template('login.html', mode=mode)
+
+
+@app.route("/logout")
+def logout():
+    session.pop('username', None)
+    return redirect("/")
 
 
 @app.route("/signup")
