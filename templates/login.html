@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>{{ mode }}</h1>
+    </div>
+    <form class="col-xs-4">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-success" id="ok">{{ mode }}</button>
+        <a href='/'><input class="btn btn-primary" type="button" id="back" value="Cancel"></a>
+    </form>
+</div>
+
+{% endblock %}
