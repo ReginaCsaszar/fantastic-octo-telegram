@@ -43,10 +43,12 @@ def logout():
 def signup_route():
     if request.method == 'POST':
         psw = generate_password_hash(request.form['psw'])
-        users.register_new(request.form['user'], psw)
-        mode = "Login"
-    else:
-        mode = "Register"
+        try:
+            users.register_new(request.form['user'], psw)
+        except:
+            return redirect("/signup")
+        return redirect("/login")
+    mode = "Register"
     return render_template('login.html', mode=mode)
 
 
