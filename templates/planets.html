@@ -23,7 +23,7 @@
             <input class="btn btn-primary disabled" type="button" value="Next">
         {% endif %}
     </p>
-    <div class="row"><br>
+    <div class="row">
         <table class="table table-bordered">
             {% for field in ['Name', 'Diameter', 'Climate', 'Terrain', 'Surface Water Percentage', 'Population', 'Residents'] %}
                 <th>{{ field }}</th>
@@ -57,11 +57,14 @@
                     {% if planet['residents']|length < 1 %}
                         <td>No known residents</td>
                     {% else %}                
-                        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#residentModal" data-info="{{ planet['residents'] }}" data-planet="{{ planet['name'] }}">Residents <span class="badge">{{ planet['residents']|length }}</span></button></td>
+                        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#residentModal" data-info="{{ planet['residents'] }}" data-planet="{{ planet['name'] }}">
+                            Residents 
+                            <span class="badge">{{ planet['residents']|length }}</span>
+                            </button></td>
                     {% endif %}
 
                     {% if user %}
-                    <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#voteModal">Vote</button></td>
+                    <td><button type="button" class="btn btn-default vote" data-planet="{{ planet['url'] }}">Vote</button></td>
                     {% endif %}
                 </tr>
             {% endfor %}
@@ -87,23 +90,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="voteModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Saved</h4>
-            </div>
-            <div class="modal-body">
-            Thanks for voting on this planet! Your vote has been registered.<br>May the Force be with you.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

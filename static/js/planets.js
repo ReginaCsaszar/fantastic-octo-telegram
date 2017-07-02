@@ -1,11 +1,10 @@
 $('#residentModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
-    var residents = button.data('info') 
+    var apis = button.data('info').replace("]", "").replace("[", "").replace(/'/g, "").split(",")
     var planet = button.data('planet')
     var modal = $(this)
-    modal.find('.modal-title').text('Residents of ' + planet)
-    $(".temp").remove()
-    apis = residents.replace("]", "").replace("[", "").replace(/'/g, "").split(",")
+    modal.find('.modal-title').text('Residents of ' + planet);
+    $(".temp").remove();
     for (let i = 0; i < apis.length; i++) {
         $.getJSON(apis[i], function(response){
             if (response["height"] != "unknown") {
@@ -18,5 +17,24 @@ $('#residentModal').on('show.bs.modal', function (event) {
         });
     }  
 })
-var modal = $(this)
-    modal.find('.modal-title').text('Residents of ' + planet)
+
+$(".vote").on("click", function(){
+    var button = $(this)
+    planet = {'url': button.data('planet')}
+    $(".alert").remove();
+    $.ajax({
+        type : 'POST',
+        url : "/vote",
+        contentType: 'application/json;charset=UTF-8',
+        data : JSON.stringify(planet),
+        success: function(response) {
+            planet = JSON.parse(response)['planet']
+            $("table").first().before("<div class='alert alert-success alert-dismissable'>"
+                     + "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                     + "<strong>Success! </strong> Your vote on " + planet + " has been registered.</div>");
+        }
+        });
+
+    
+    
+    });

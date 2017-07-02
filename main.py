@@ -1,7 +1,8 @@
 """Main program functions"""
-from flask import Flask, render_template, session, redirect, escape, request
+from flask import Flask, render_template, session, redirect, escape, request, json
 from werkzeug.security import check_password_hash, generate_password_hash
 import requests
+import re
 import content
 import users
 
@@ -47,6 +48,15 @@ def signup_route():
     else:
         mode = "Register"
     return render_template('login.html', mode=mode)
+
+
+@app.route('/vote', methods=['POST'])
+def vote_route():
+    data = requests.get(request.json['url']).json()
+    planet_id = int(re.findall(r'\d+', request.json['url'])[0])
+    user = escape(session['username'])
+    users.handle_vote(data['name'], planet_id, user)
+    return json.dumps({'status': 'OK', 'planet': data['name']})
 
 
 def main():
