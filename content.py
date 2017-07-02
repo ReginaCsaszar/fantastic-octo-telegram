@@ -1,13 +1,5 @@
 """Content handler program functions"""
-from database import db_handler
-
-
-def planets():
-    planets = {}
-    return planets
-
-
-# table = db_handler.get_results("""SELECT ;""")
+from database import database
 
 
 if __name__ == '__main__':

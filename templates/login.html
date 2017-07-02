@@ -9,17 +9,14 @@
     <form class="col-xs-4" method="post">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="user" name="user">
+            <input type="text" class="form-control" name="user">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="psw" name="psw">
+            <input type="password" class="form-control" name="psw">
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-success" id="ok">{{ mode }}</button>
-        <a href='/'><input class="btn btn-primary" type="button" id="back" value="Cancel"></a>
+        <button type="submit" class="btn btn-success">{{ mode }}</button>
+        <a href='/'><input class="btn btn-primary" type="button" value="Cancel"></a>
     </form>
 </div>
 

@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS public.users;
 DROP SEQUENCE IF EXISTS public.users_id_seq;
 CREATE TABLE users (
     id serial NOT NULL,
-    username varchar,
+    username varchar UNIQUE,
     password varchar
 );
 
@@ -25,6 +25,9 @@ CREATE TABLE planet_votes (
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT pk_users_id PRIMARY KEY (id);
+
+ALTER TABLE ONLY users
+    ADD UNIQUE (username);
 
 ALTER TABLE ONLY planet_votes
     ADD CONSTRAINT pk_planet_votes_id PRIMARY KEY (id);
