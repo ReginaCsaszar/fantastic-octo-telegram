@@ -33,8 +33,17 @@ $(".vote").on("click", function(){
                      + "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
                      + "<strong>Success! </strong> Your vote on " + planet + " has been registered.</div>");
         }
-        });
-
-    
-    
     });
+ });
+
+ $('#statModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    $(".voterows").remove();
+    $.getJSON("/stat", function(response){
+        var data = response['data']
+        for (let i = 0; i < data.length; i++) {
+            var row = data[i]
+            modal.find('.modal-body table').append("<tr class='voterows'><td>" + row[1] + "</td><td>" + row[0] + "</td></tr>");
+        }
+    }); 
+})

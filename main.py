@@ -59,6 +59,12 @@ def vote_route():
     return json.dumps({'status': 'OK', 'planet': data['name']})
 
 
+@app.route('/stat')
+def stat_route():
+    stats = content.get_stats()
+    return json.dumps({'status': 'OK', 'data': stats})
+
+
 def main():
     app.run(debug=True)
 
