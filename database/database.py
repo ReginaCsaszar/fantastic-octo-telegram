@@ -17,20 +17,15 @@ planet_votes (
 import psycopg2
 from database import config
 
-import os
-import urllib
-
 
 def get_results(query, need=False):
     rows = None
-    urllib.parse.uses_netloc.append('postgres')
-    url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+    user = config.identify()
     connection = psycopg2.connect(
-        database=url.path[1:],
-        user=url.username,
-        password=url.password,
-        host=url.hostname,
-        port=url.port
+        dbname=user[0],
+        user=user[1],
+        password=user[2],
+        host='localhost',
     )
     connection.autocommit = True
     cursor = connection.cursor()
@@ -40,13 +35,3 @@ def get_results(query, need=False):
     cursor.close()
     connection.close()
     return rows
-
-"""
-    user = config.identify()
-    connection = psycopg2.connect(
-        dbname=user[0],
-        user=user[1],
-        password=user[2],
-        host='localhost',
-    )
-"""
