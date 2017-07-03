@@ -1,6 +1,6 @@
 $('#residentModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
-    var apis = button.data('info').replace("]", "").replace("[", "").replace(/'/g, "").split(",")
+    var apis = button.data('info').replace("]", "").replace("[", "").replace(/'/g, "").replace("http", "https").split(",")
     var planet = button.data('planet')
     var modal = $(this)
     modal.find('.modal-title').text('Residents of ' + planet);
