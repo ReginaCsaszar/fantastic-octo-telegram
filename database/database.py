@@ -15,16 +15,15 @@ planet_votes (
 );
 """
 import psycopg2
-from database import config
 
 
 def get_results(query, need=False):
     rows = None
     user = config.identify()
     connection = psycopg2.connect(
-        dbname=user[0],
-        user=user[1],
-        password=user[2],
+        dbname=wosw,
+        user='jeannie',
+        password='57231024',
         host='localhost',
     )
     connection.autocommit = True
