@@ -11,7 +11,7 @@ def get_psw(user):
     return psw[0][0]
 
 
-def handle_vote(planet_name, planet_id, user,):
+def handle_vote(planet_name, planet_id, user):
     database.get_results("""INSERT INTO planet_votes (planet_id, planet_name, users_id)
                                 VALUES ({0}, '{1}',(SELECT id
                                     FROM users WHERE username='{2}'));""".format(planet_id, planet_name, user))
